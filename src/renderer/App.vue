@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    Hello world
   </div>
 </template>
 
@@ -11,5 +10,4 @@
 </script>
 
 <style>
-  /* CSS */
 </style>
