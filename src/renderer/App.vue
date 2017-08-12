@@ -5,15 +5,15 @@
 </template>
 
 <script>
-   const files = require('../fileStructureLayer/files.js')
+   // const files = require('../fileSystem/files.js');
    export default {
       name: 'finder',
       methods: {
-         bla () {
-            files.files()
+         bla() {
+           // files.addDir('d');
          }
       }
-   }
+   };
 </script>
 
 <style>
