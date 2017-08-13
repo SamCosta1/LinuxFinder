@@ -5,8 +5,8 @@
 </template>
 
 <script>
-   import * as files from './files';
-
+   import * as files from './fileSystem/files';
+   
    export default {
       name: 'finder',
       data() {
@@ -15,6 +15,12 @@
          };
       },
       methods: {
+         change(data) {
+            console.log(data);
+         },
+         error(err) {
+            console.log(err);
+         }
       }
    };
 </script>
