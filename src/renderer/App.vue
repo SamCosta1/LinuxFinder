@@ -1,17 +1,20 @@
 <template>
-   <div id="app" @click="bla()">
+   <div id="app">
       Hello world
    </div>
 </template>
 
 <script>
-   // const files = require('../fileSystem/files.js');
+   import * as files from './files';
+
    export default {
       name: 'finder',
+      data() {
+         return {
+
+         };
+      },
       methods: {
-         bla() {
-           // files.addDir('d');
-         }
       }
    };
 </script>
