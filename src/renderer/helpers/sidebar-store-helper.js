@@ -1,7 +1,7 @@
 const path = require('path');
 const SIDEBAR_CONF_KEY = 'sidebarConfig';
 
-export function getContent() {
+export function getConfig() {
    if (!localStorage.hasOwnProperty(SIDEBAR_CONF_KEY)) {
       localStorage.setItem(SIDEBAR_CONF_KEY, JSON.stringify(defaultConfig));
    }
@@ -29,12 +29,10 @@ const defaultConfig = [
    },
 
    {
-      string: 'Documents',
       path: '/home/sam/Documents'
    },
 
    {
-      string: 'Pictures',
       path: '/home/sam/Pictures'
    }
 ];

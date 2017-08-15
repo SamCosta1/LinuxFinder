@@ -1,7 +1,7 @@
 <template>
-   <div id="sidebar">
-      <div v-for="dir in content">
-         {{dir}}
+   <div class="sidebar">
+      <div v-for="dir in config" @click="onClick(dir.path)">
+         {{dir.string}}
       </div>
    </div>
 </template>
@@ -13,17 +13,22 @@
       name: 'finder',
       data() {
          return {
-            content: {}
+            config: {}
          };
       },
       methods: {
+         onClick(path) {
+            this.$emit('changeRootDir', path);
+         }
       },
 
       mounted() {
-         this.content = store.getContent();
+         this.config = store.getConfig();
       }
    };
 </script>
 
-<style>
+<style lang="scss">
+
+
 </style>

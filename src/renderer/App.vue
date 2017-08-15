@@ -1,11 +1,25 @@
 <template>
    <div id="app">
-      <Sidebar></Sidebar>
+
+      <div class="top-bar-container">
+
+      </div>
+
+      <div class="main-content-container">
+
+         <div class="sidebar-container">
+            <Sidebar v-on:changeRootDir="changeRootDirectory"></Sidebar>
+         </div>
+
+         <div class="main-browser-container">
+            <NavigatorView></NavigatorView>
+         </div>
+
+      </div>
    </div>
 </template>
 
 <script>
-   import * as files from './fileSystem/files';
    
    export default {
       name: 'finder',
@@ -15,15 +29,39 @@
          };
       },
       methods: {
-         change(data) {
-            console.log(data);
-         },
-         error(err) {
-            console.log(err);
+         changeRootDirectory(newPath) {
+            console.log(newPath);
          }
       }
    };
 </script>
 
-<style>
+<style lang="scss">
+   @import "./scss/styles";
+
+   body {
+      margin: 0px;
+
+      #app {
+         height: 100vh;
+      }
+   }
+
+   .top-bar-container {
+      background-color: blue;
+   }
+
+   .main-content-container {
+      display: flex;
+      height: 100%;
+
+      .main-browser-container {
+         width: 100%;
+      }
+
+      .sidebar-container {
+
+      }
+   }
+
 </style>
