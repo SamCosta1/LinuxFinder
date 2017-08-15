@@ -1,5 +1,5 @@
 'use strict';
-import * as observers from './observerHelper';
+import * as observers from './observer-helper';
 
 const watch = require('node-watch');
 const fs = require('fs-extra');
