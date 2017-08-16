@@ -16,6 +16,10 @@ function parseConfig(confString) {
       if (!dir.hasOwnProperty('string')) {
          dir.string = path.basename(dir.path);
       }
+
+      if (dir.default) {
+         rawConfig.default = dir;
+      }
    }
 
    return rawConfig;
@@ -25,7 +29,8 @@ function parseConfig(confString) {
 const defaultConfig = [
    {
       string: 'Home',
-      path: '/home/sam'
+      path: '/home/sam',
+      default: true
    },
 
    {

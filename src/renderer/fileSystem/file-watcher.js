@@ -3,6 +3,7 @@ import * as observers from './observer-helper';
 
 const watch = require('node-watch');
 const fs = require('fs-extra');
+const Path = require('path');
 
 var errorHandler;
 
@@ -11,6 +12,7 @@ export function setErrorHandler(handler) {
 }
 
 export function addObserver(path, changeListener, removeListener) {
+   path = Path.resolve(path);
    var observer = observers.newObserver(path, changeListener, removeListener);
    var watcher = newWatcher(path, observer);
 
@@ -37,21 +39,44 @@ function newWatcher(path, observer) {
    watcher.on('error', (event, path) => {
       errorHandler({
          event,
-         path
+         path: Path.resolve(path)
       });
    });
+
+   return watcher;
+}
+
+export function getInitialDirectoryContent(observer, callback) {
+   var paths = fs.readdirSync(observer.path);
+
+   if (paths === null || paths === undefined || paths.length === 0) {
+      return [];
+   }
+
+   var promises = [];
+
+   for (var path of paths) {
+      const fullPath = Path.join(observer.path, path);
+      promises.push(getStats(fullPath));
+   }
+
+   Promise.all(promises).then(callback).catch(errorHandler);
 }
 
 function getStats(path) {
    return new Promise((resolve, reject) => {
       fs.lstat(path, (err, stats) => {
-         if (err) errorHandler(err);
+         if (err) {
+            errorHandler(err);
+            reject(err);
+            return;
+         }
 
          resolve({
             path,
-            directory: stats.isDirectory(),
+            isDirectory: stats.isDirectory(),
             birthtime: stats.birthtime,
-            modified: stats.mtime
+            modifiedtime: stats.mtime
          });
       });
    });

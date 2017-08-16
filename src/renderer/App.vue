@@ -12,7 +12,7 @@
          </div>
 
          <div class="main-browser-container">
-            <NavigatorView></NavigatorView>
+            <NavigatorView :rootDir="rootDir"></NavigatorView>
          </div>
 
       </div>
@@ -20,18 +20,27 @@
 </template>
 
 <script>
+
+   import * as watcher from './fileSystem/file-watcher.js';
    
    export default {
       name: 'finder',
       data() {
          return {
-
+            rootDir: ''
          };
       },
       methods: {
          changeRootDirectory(newPath) {
-            console.log(newPath);
+            this.rootDir = newPath;
+         },
+         err(e) {
+            console.log(e);
          }
+      },
+
+      mounted() {
+         watcher.setErrorHandler(this.err);
       }
    };
 </script>
